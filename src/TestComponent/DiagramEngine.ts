@@ -1,0 +1,5 @@
+class DiagramEngine {
+    constructor(parameters) {
+        
+    }
+}

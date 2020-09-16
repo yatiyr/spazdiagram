@@ -4,8 +4,11 @@
     background-color: white;
     border: 1px solid black;
     padding: 16px;
-    width: 360px;
+    width: 1000px;
+    height: 500px;
     text-align: center;
+    overflow: hidden;
+    position: absolute;
     
     .heading {
         font-size: 50px;
@@ -16,3 +19,48 @@
         color: white;
     }
 }
+
+.eren {
+    z-index: -10;
+    color: purple;
+    user-select: none;
+}
+svg {
+    display: block;
+    overflow: visible;
+
+    .path_inline {
+        transition: stroke .5s;
+    }
+
+    .path_outline {
+
+        &:hover {
+        + .path_inline {
+            stroke-dasharray: 25;
+            stroke-dashoffset: 0;
+            animation: dash 2s linear infinite;
+            stroke: rgb(195, 0, 255);
+
+            }
+
+        }
+
+    }
+
+    .path_inline:hover {
+        stroke-dasharray: 25;
+        stroke-dashoffset: 0;
+        animation: dash 2s linear infinite;
+        stroke: rgb(195, 0, 255);
+    }
+    
+    @keyframes dash {
+      from {
+        stroke-dashoffset: 200;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
