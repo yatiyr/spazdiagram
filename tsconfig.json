@@ -11,7 +11,7 @@
       "allowSyntheticDefaultImports": true,
       "esModuleInterop": true
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "test/TestComponent/TestComponent.test.tsx", "test/TestComponent/TestComponent.test.tsx"],
     "exclude": [
       "node_modules",
       "build",
