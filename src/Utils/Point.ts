@@ -53,4 +53,19 @@ export default class Point {
 
     }
 
+    static giveMidpoint(pointList : Point[]): Point {
+        let result = new Point(0,0);
+
+       pointList.forEach(point => {
+            result.x += point.x;
+            result.y += point.y;           
+       });
+
+       result.x /= pointList.length;
+       result.y /= pointList.length;
+
+       return result;
+
+    }
+
 }

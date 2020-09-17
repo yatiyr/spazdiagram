@@ -197,6 +197,23 @@ describe("Point Tests", () => {
     });
 
 
+    test("Point GiveMidpoint", () => {
+
+        let point1 = new Point(1,1);
+        let point2 = new Point(1,0);
+        let point3 = new Point(1,-1);
+        let point4 = new Point(0,-1);
+        let point5 = new Point(-1,-1);
+        let point6 = new Point(-1,0);
+        let point7 = new Point(-1,1);
+        let point8 = new Point(0,1);
+
+        let pArray = [point1,point2,point3,point4,point5,point6,point7,point8];
+
+        let midPoint = Point.giveMidpoint(pArray);
+
+        expect(isPointEqual(midPoint,0,0))
+    });
 
 
 });
