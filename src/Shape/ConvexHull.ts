@@ -1,11 +1,12 @@
 import Point from '../Utils/Point';
+import Shape from './Shape';
 
-export default class ConvexHull {
+export default class ConvexHull extends Shape {
 
     public points: Point[];
-    public centerOfMass: Point;
 
     constructor(points: Point[]) {
+        super();
         this.points = [];
         
         points.forEach(point => {
@@ -16,23 +17,19 @@ export default class ConvexHull {
         this.centerOfMass = Point.giveMidpoint(points);
     }
 
-    public getPosition(): Point {
-        return this.centerOfMass;
-    }
-
     public setPosition(pos: Point) {
 
         // Values needed for translation of shape's point
         let xdif = pos.x - this.centerOfMass.x;
         let ydif = pos.y - this.centerOfMass.y;
 
+        this.centerOfMass.x = pos.x;
+        this.centerOfMass.y = pos.y;
+
         this.points.forEach(point => {
             point.x += xdif;
             point.y += ydif;
         });
-
-        this.centerOfMass.x = pos.x;
-        this.centerOfMass.y = pos.y;
 
     }
 
@@ -99,11 +96,13 @@ export default class ConvexHull {
         return true;
     }
 
-    public isShapeInside(shape: ConvexHull): boolean {
+    public isShapeInside(shape: Shape): boolean {
 
-        for(let i=0;i<shape.points.length;i++) {
-            if(this.isPointInside(shape.points[i]) === false) {
-                return false;
+        if(shape instanceof ConvexHull) {
+            for(let i=0;i<shape.points.length;i++) {
+                if(this.isPointInside(shape.points[i]) === false) {
+                    return false;
+                }
             }
         }
 
