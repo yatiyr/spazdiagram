@@ -3,11 +3,12 @@
     flex-direction: column;
     background-color: white;
     border: 1px solid black;
-    width: 1000px;
-    height: 1000px;
+    width: 600px;
+    height: 600px;
     text-align: center;
     overflow: hidden;
     position: absolute;
+    user-select: none;
     
     .heading {
         font-size: 50px;
@@ -27,6 +28,7 @@
 svg {
     display: block;
     overflow: visible;
+    user-select: none;
 
     .path_inline {
         transition: stroke .5s;

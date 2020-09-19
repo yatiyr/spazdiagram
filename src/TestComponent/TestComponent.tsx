@@ -1,11 +1,13 @@
 import React from "react";
 import Canvas from "./Canvas";
+import ReactDOM from "react-dom";
 
 import { TestComponentProps } from "./TestComponent.types";
 
 import "./TestComponent.scss";
 
 class Comp extends React.Component<TestComponentProps> {
+
   constructor(props) {
     super(props);
   }
