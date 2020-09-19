@@ -25,6 +25,12 @@
     color: purple;
     user-select: none;
 }
+
+.diagramWrapper {
+    height: 100%;
+    width: 100%;
+}
+
 svg {
     display: block;
     overflow: visible;
