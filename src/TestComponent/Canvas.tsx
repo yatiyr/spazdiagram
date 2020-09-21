@@ -61,28 +61,45 @@ export default class Canvas extends React.Component<TestComponentProps,State> {
     this.zoom.value = 1;
   }
 
-
-  // TODO: DUZELT
   handleZoom(event: WheelEvent) {
+
     event.preventDefault();
+    let scaleFactor = this.state.zoomLevel/100;
+    let newScaleFactor: number;
+
     if((event.deltaY < 0 && this.state.zoomLevel <= 300)) {
       this.zoom.value = this.zoom.value >= this.zoom.max ? this.zoom.max : this.zoom.value + this.zoom.step;
-      this.setState({zoomLevel: this.state.zoomLevel + this.zoom.value});
+      newScaleFactor = (this.state.zoomLevel + this.zoom.value)/100;
 
+      let estimatedNewClientX = (((event.offsetX)*newScaleFactor)/scaleFactor - event.offsetX)/scaleFactor;
+      let estimatedNewClientY = (((event.offsetY)*newScaleFactor)/scaleFactor - event.offsetY)/scaleFactor;
+
+      let newPointX = this.state.upperLeftPoint.x - estimatedNewClientX;
+      let newPointY = this.state.upperLeftPoint.y - estimatedNewClientY;
+
+
+      let newPoint = new Point(newPointX,newPointY);
+
+      console.log(newPoint);
+      this.setState({upperLeftPoint: newPoint, zoomLevel: this.state.zoomLevel + this.zoom.value});                               
     }
-    else if(event.deltaY > 0 && this.state.zoomLevel >= 25) {
+    else if(event.deltaY > 0 && this.state.zoomLevel >= 50) {
       this.zoom.value = this.zoom.value >= this.zoom.max ? this.zoom.max : this.zoom.value + this.zoom.step;
-      this.setState({zoomLevel: this.state.zoomLevel - this.zoom.value});
+      newScaleFactor = (this.state.zoomLevel - this.zoom.value)/100;
+
+      let estimatedNewClientX = (((event.offsetX)*newScaleFactor)/scaleFactor - event.offsetX)/scaleFactor;
+      let estimatedNewClientY = (((event.offsetY)*newScaleFactor)/scaleFactor - event.offsetY)/scaleFactor;
+
+      let newPointX = this.state.upperLeftPoint.x - estimatedNewClientX;
+      let newPointY = this.state.upperLeftPoint.y - estimatedNewClientY;
+
+      let newPoint = new Point(newPointX,newPointY);
+
+      console.log(newPoint);
+      this.setState({upperLeftPoint: newPoint, zoomLevel: this.state.zoomLevel - this.zoom.value}); 
     }
 
-    let xDiff = event.offsetX/10;
-    let yDiff = event.offsetY/10;
-
-    let newPoint = new Point(this.state.upperLeftPoint.x - xDiff, this.state.upperLeftPoint.y - yDiff);
-
-    this.setState({upperLeftPoint: newPoint})
     setTimeout(this.clearZoom, 10)
-    console.log(event.offsetX, ' ', event.offsetY);
   }
 
   handleClick(event: MouseEvent) {
@@ -197,13 +214,6 @@ export default class Canvas extends React.Component<TestComponentProps,State> {
               className="path_inline"
               transform="translate(200,20)">
             </path>
-            <circle cx="1000" 
-              cy="1000" 
-              r="40" 
-              stroke="#000" 
-              strokeWidth="2"
-              className="path_inline"
-              fill="none"/>
           </g>
         </svg>
       </div>
